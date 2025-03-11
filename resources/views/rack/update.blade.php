@@ -38,7 +38,7 @@
 
                         <div class="mb-3">
                             <label for="rack_number" class="form-label fw-bold">Rack Number :</label>
-                            <input type="text" class="form-control text-uppercase" id="rack_number" name="rack_number" value="{{ $racks->rack_number}}" required>
+                            <input type="text" class="form-control" id="rack_number" name="rack_number" value="{{ $racks->rack_number}}" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Submit</button>

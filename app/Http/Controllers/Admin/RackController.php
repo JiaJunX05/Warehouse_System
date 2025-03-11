@@ -55,7 +55,8 @@ class RackController extends Controller
         ]);
 
         $racks = Rack::create([
-            'rack_number' =>  strtoupper($request->rack_number),
+            'rack_number' => $trquest->rack_number,
+            // 'rack_number' =>  strtoupper($request->rack_number),
         ]);
 
         return redirect()->route('rack.list')->with('success', 'Rack created successfully');
@@ -72,7 +73,8 @@ class RackController extends Controller
         ]);
 
         $racks = Rack::find($id);
-        $racks->rack_number = strtoupper($request->rack_number);
+        $racks->rack_number = $request->rack_number;
+        // $racks->rack_number = strtoupper($request->rack_number);
         $racks->save();
 
         return redirect()->route('rack.list')->with('success', 'Rack updated successfully');

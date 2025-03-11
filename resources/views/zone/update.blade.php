@@ -38,7 +38,7 @@
 
                         <div class="mb-3">
                             <label for="zone_name" class="form-label fw-bold">Zone Name:</label>
-                            <input type="text" class="form-control text-uppercase" id="zone_name" name="zone_name" value="{{ $zones->zone_name }}" required>
+                            <input type="text" class="form-control" id="zone_name" name="zone_name" value="{{ $zones->zone_name }}" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Submit</button>

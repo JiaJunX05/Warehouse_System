@@ -56,8 +56,8 @@ class ZoneController extends Controller
         ]);
 
         $zones = Zone::create([
-            // 'zone_name' => $request->zone_name,
-            'zone_name' =>  strtoupper($request->zone_name),
+            'zone_name' => $request->zone_name,
+            // 'zone_name' =>  strtoupper($request->zone_name),
         ]);
 
         return redirect()->route('zone.list')->with('success', 'Zone created successfully');
@@ -74,8 +74,8 @@ class ZoneController extends Controller
         ]);
 
         $zones = Zone::find($id);
-        // $zones->zone_name = $request->zone_name;
-        $zones->zone_name = strtoupper($request->zone_name);
+        $zones->zone_name = $request->zone_name;
+        // $zones->zone_name = strtoupper($request->zone_name);
         $zones->save();
 
         return redirect()->route('zone.list')->with('success', 'Zone updated successfully');
