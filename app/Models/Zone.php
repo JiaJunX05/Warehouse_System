@@ -20,15 +20,6 @@ class Zone extends Model
         'zone_name',
     ];
 
-    // 在创建或更新时，将 zone_name 转换为大写
-    protected static function boot() {
-        parent::boot();
-
-        static::creating(function ($zone) {
-            $zone->zone_name = strtoupper($zone->zone_name);
-        });
-    }
-
     public function racks(): HasManyThrough {
         return $this->hasManyThrough(Rack::class, Storack::class, 'zone_id', 'rack_id');
     }

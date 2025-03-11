@@ -36,120 +36,33 @@
     </div>
     <hr>
 
-    <!-- 卡片列表 -->
-    <div id="zone-card-container" class="row row-cols-1 row-cols-md-3 g-4"></div>
-
-    <div id="no-results" class="text-center py-3" style="display: none;">No results found.</div>
-
-    <!-- Pagination -->
-    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-        <ul id="pagination" class="pagination"></ul>
-    </nav>
-</div>
-
-<script>
-    $(document).ready(function() {
-        let currentZone = '';
-
-        // 初始加载
-        loadZones(1);
-
-        // 监听搜索框变化
-        $('#zone_id').on('change', function() {
-            currentZone = $(this).val();
-            loadZones(1);
-        });
-
-        function loadZones(page) {
-            $.ajax({
-                url: "{{ route('zone.list') }}",
-                type: 'GET',
-                data: {
-                    page: page,
-                    zone_id: currentZone,
-                    length: 9  // 每页显示 9 个
-                },
-                success: function(response) {
-                    renderCards(response.data);
-                    renderPagination(response.current_page, response.last_page);
-                    $('#no-results').toggle(response.data.length === 0);
-                },
-                error: function(xhr) {
-                    console.error('Error loading zones:', xhr);
-                }
-            });
-        }
-
-        function renderCards(data) {
-            let container = $('#zone-card-container');
-            container.empty();
-
-            data.forEach(zone => {
-                container.append(`
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-header">
-                                <img src="{{ asset('assets/icons/zone.png') }}"
-                                alt="Zone Icon" class="card-img-top" style="width: 50px; height: 50px; object-fit: contain;">
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">${zone.zone_name}</h5>
-                            </div>
-                            <div class="card-footer text-body-secondary">
-                                <div class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('zone.update', '') }}/${zone.id}" class="btn btn-warning btn-sm w-50">Edit</a>
-                                    <form action="{{ route('zone.destroy', '') }}/${zone.id}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Zone?');" class="w-50">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="btn btn-danger btn-sm w-100">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
+    <div class="row">
+        @foreach($zones as $zone)
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="{{ asset('assets/icons/Zone.png') }}" alt="Zone Icon" class="img-fluid" style="width: 30px;">
+                            <h4 class="card-title text-primary mb-0">{{ $zone->zone_name }}</h4>
                         </div>
                     </div>
-                `);
-            });
-        }
 
-        function renderPagination(currentPage, lastPage) {
-            let pagination = $('#pagination');
-            pagination.empty();
+                    <div class="card-footer text-body-secondary">
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="{{ route('zone.update', $zone->id) }}" class="btn btn-warning btn-sm" style="width: 100px;">Edit</a>
+                            <form action="{{ route('zone.destroy', $zone->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this zone?');">
+                                @csrf
+                                @method('DELETE')
 
-            // Previous Button
-            if (currentPage > 1) {
-                pagination.append(`<li class="page-item">
-                    <a class="page-link" href="#" data-page="${currentPage - 1}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>`);
-            }
-
-            // Page Numbers
-            for (let i = Math.max(1, currentPage - 2); i <= Math.min(lastPage, currentPage + 2); i++) {
-                pagination.append(`<li class="page-item ${i === currentPage ? 'active' : ''}">
-                    <a class="page-link" href="#" data-page="${i}">${i}</a>
-                </li>`);
-            }
-
-            // Next Button
-            if (currentPage < lastPage) {
-                pagination.append(`<li class="page-item">
-                    <a class="page-link" href="#" data-page="${currentPage + 1}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>`);
-            }
-
-            // 绑定事件，防止重复绑定
-            $('.page-link').off('click').on('click', function (e) {
-                e.preventDefault();
-                const page = $(this).data('page');
-                loadZones(page);
-            });
-        }
-    });
-</script>
+                                <button type="submit" class="btn btn-danger btn-sm" style="width: 100px;">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 @endsection
 
 @section('css')

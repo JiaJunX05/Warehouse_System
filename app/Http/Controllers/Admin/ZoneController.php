@@ -8,43 +8,10 @@ use App\Models\Zone;
 
 class ZoneController extends Controller
 {
-    public function index(Request $request) {
-        // 获取所有区域数据
+    public function index() {
         $zones = Zone::all();
-
-        // 处理 AJAX 请求
-        if ($request->ajax()) {
-            // 查询区域数据
-            $query = Zone::query();
-
-            // 区域过滤
-            if ($request->filled('zone_id')) {
-                $query->where('id', $request->input('zone_id'));
-            }
-
-            // 分页参数
-            $perPage = $request->input('length', 9);
-            $page = $request->input('page', 1);
-
-            // 获取分页数据
-            $zones = $query->paginate($perPage, ['*'], 'page', $page);
-
-            // 返回 DataTables 兼容的 JSON 响应
-            return response()->json([
-                'draw' => $request->input('draw'), // DataTables 绘制计数器
-                'recordsTotal' => $zones->total(),
-                'recordsFiltered' => $zones->total(),
-                'data' => $zones->items(),
-                'current_page' => $zones->currentPage(),
-                'last_page' => $zones->lastPage(),
-                'total' => $zones->total(),
-            ]);
-        }
-
-        // 非 AJAX 请求，返回初始视图数据
         return view('zone.dashboard', compact('zones'));
     }
-
 
     public function showCreateForm() {
         return view('zone.create');
