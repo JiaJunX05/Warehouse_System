@@ -3,10 +3,6 @@
 @section("title", "Create Product")
 @section("content")
 
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-10">

@@ -3,9 +3,6 @@
 @section("title", "Admin Panel")
 @section("content")
 
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
 <div class="container text-center mt-5">
     <!-- Success Alert -->
     @if(session('success'))
