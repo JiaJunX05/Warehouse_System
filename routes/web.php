@@ -15,7 +15,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.logi
 
 // Admin Routes
 Route::prefix('admin')->group(function() {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::get('/', [AuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'login'])->name('admin.login.submit');
 
     Route::middleware([AdminAuth::class])->group(function() {
