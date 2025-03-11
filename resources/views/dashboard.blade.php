@@ -111,8 +111,6 @@
                 success: function(response) {
                     renderTable(response.data);
                     renderPagination(response.current_page, response.last_page);
-
-                    // 显示/隐藏无结果提示
                     $('#no-results').toggle(response.data.length === 0);
                 },
                 error: function(xhr) {
