@@ -73,7 +73,7 @@ class SKUController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sku_code' => 'required|string|max:255|unique:skus,sku_code',
             'zone_id' => 'required|exists:zones,id',
-            'rack_id' => 'required|exists:racks,id',
+            'rack_id' => 'nullable|exists:racks,id',
         ]);
 
         if ($imageFile = $request->file('image')) {
@@ -102,7 +102,7 @@ class SKUController extends Controller
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'sku_code' => 'required|string|max:255|unique:skus,sku_code,' . $id,
-            'zone_id' => 'required|exists:zones,id',
+            'zone_id' => 'nullable|exists:zones,id',
             'rack_id' => 'nullable|exists:racks,id',
         ]);
 

@@ -73,7 +73,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="rack_id" class="form-label fw-bold">Select Rack :</label>
-                                            <select class="form-select" id="rack_id" name="rack_id" required disabled>
+                                            <select class="form-select" id="rack_id" name="rack_id" disabled>
                                                 <option selected disabled value="">Select a rack</option>
                                             </select>
                                         </div>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('skus', function (Blueprint $table) {
             $table->id();
-            $table->string('image', 255)->default('default.jpg');
+            $table->string('image', 255)->nullable()->default('default.jpg');
             $table->string('sku_code')->unique();
             $table->foreignId('zone_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('rack_id')->nullable()->constrained()->onDelete('set null');
