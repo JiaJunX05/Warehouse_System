@@ -77,7 +77,7 @@ class SKUController extends Controller
         ]);
 
         if ($imageFile = $request->file('image')) {
-            $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+            $imageName = time() . uniqid() . '.' . $imageFile->getClientOriginalExtension();
             $imageFile->move(public_path('assets/images'), $imageName);
         }
 
@@ -111,12 +111,12 @@ class SKUController extends Controller
         // 处理图片上传
         if ($request->hasFile('image')) {
             // 删除旧的图片文件
-            if ($request->image && file_exists(public_path('assets/' . $task->image))) {
-                unlink(public_path('assets/' . $task->image));
+            if ($request->image && file_exists(public_path('assets/' . $skus->image))) {
+                unlink(public_path('assets/' . $skus->image));
             }
 
             // 上传新的图片
-            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $imageName = time() . uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('assets/images'), $imageName);
             $skus->image = 'images/' . $imageName;
         }

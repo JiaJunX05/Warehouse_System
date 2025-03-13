@@ -70,20 +70,6 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="rack_id" class="form-label fw-bold">Select Rack :</label>
-                                            <select class="form-select" id="rack_id" name="rack_id" data-selected="{{ $skus->rack_id }}">
-                                                <option disabled>Select a rack</option>
-                                                @foreach($storacks as $storack)
-                                                    <option value="{{ $storack->rack->id }}" {{ $skus->rack_id == $storack->rack->id ? 'selected' : '' }}>
-                                                        {{ strtoupper($storack->rack->rack_number) }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div> --}}
-
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="rack_id" class="form-label fw-bold">Select Rack :</label>
