@@ -21,7 +21,7 @@ class GuestController extends Controller
             // 搜索过滤
             if ($request->filled('search')) {
                 $search = $request->input('search');
-                $query->where('sku_code', 'like', "%{$search}%");
+                $query->where('sku_code', 'like', '%' . $search . '%');
             }
 
             // 区域过滤

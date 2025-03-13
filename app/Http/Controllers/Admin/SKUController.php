@@ -23,7 +23,7 @@ class SKUController extends Controller
             // 搜索过滤
             if ($request->filled('search')) {
                 $search = $request->input('search');
-                $query->where('sku_code', 'like', "%{$search}%");
+                $query->where('sku_code', 'like', '%' . $search . '%');
             }
 
             // 区域过滤
@@ -132,10 +132,9 @@ class SKUController extends Controller
     public function destroy($id) {
         $skus = SKU::findOrFail($id);
 
-        $imagePath = public_path('assets/' . $skus->image);
-
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
+        // 删除图片文件
+        if (file_exists(public_path('assets/' . $skus->image))) {
+            unlink(public_path('assets/' . $skus->image));
         }
         $skus->delete();
 
